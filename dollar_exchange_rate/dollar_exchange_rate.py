@@ -28,9 +28,9 @@ def get_exchange_rate():
         btc_exchange = request_dict['BTCBRL']['bid']
 
         text_rate = f'''
-        Dolar: {round(float(dollar_exchange), 2)}
-        Euro: {round(float(euro_exchange), 2)}
-        BitCoin: {round(float(btc_exchange), 2)}
+        Dolar: {round(float(dollar_exchange), 3)}
+        Euro: {round(float(euro_exchange), 3)}
+        BitCoin: {round(float(btc_exchange), 3)}
         '''
 
         # print(text_rate)
@@ -39,6 +39,22 @@ def get_exchange_rate():
 
 # call function
 # get_exchange_rate()
+
+# convert real to dollar
+def real_to_dollar():
+        request_url = get_rate
+
+        request_dict = request_url.json()
+
+        dollar_exchange = request_dict['USDBRL']['bid']
+        euro_exchange = request_dict['EURBRL']['bid']
+        btc_exchange = request_dict['BTCBRL']['bid']
+
+        text_convert_out = f'''
+        Dollar: {round(float(dollar_exchange),2) * float(real.get())}
+        '''
+
+        txt_convert['text'] = text_convert_out
 
 # Build GUI #
 main_window = Tk()
@@ -54,5 +70,21 @@ button.grid(column=0, row=1)
 
 txt_exchange = Label(main_window, text='')
 txt_exchange.grid(column=0, row=2)
+
+# converting between coins
+text_position = Label(main_window, text='Converter um valor em Real para Dólar')
+text_position.grid(column=0, row=4, padx=10, pady=10)
+
+text_position = Label(main_window, text='Informe o Valor em Real')
+text_position.grid(column=0, row=5)
+real = Entry(main_window)
+real.place(width=200, height=50)
+real.grid(column=0, row=6)
+
+button_convert = Button(main_window, text='Real para Dólar', command=real_to_dollar)
+button_convert.grid(column=0, row=7)
+
+txt_convert = Label(main_window, text='')
+txt_convert.grid(column=0, row=8)
 
 main_window.mainloop()
