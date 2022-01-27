@@ -5,7 +5,7 @@ import pandas as pd
 
 
 # set directory
-my_path = 'D://Robson/home_office'
+my_path = '.'
 
 # list files and directories
 list_files = os.scandir(my_path)
